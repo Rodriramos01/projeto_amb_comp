@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>pagina para criar conta do RU </title>
+</head>
+<body>
+    <h1>Bem-vindo ao meu site!</h1>   
+
+    <p>Este é um parágrafo de exemplo.</p>
+
+    <form method="POST">  
+        {{ form.csrf_token }}
+
+        {{form.email.label() }}
+        {{form.email() }}
+
+        {{form.username.label() }}
+        {{form.username() }}
+
+        {{ form.senha.label() }}
+        {{form.senha() }}
+
+        {{ form.confirmacao_senha.label() }}
+        {{form.confirmacao_senha() }}
+
+
+        {{form.botao_confirmacao() }}
+
+    </form>        
+</body>
+</html>
