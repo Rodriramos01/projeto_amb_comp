@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>Dashboard de Marmitas</title>
+</head>
+<body>
+    <h1>Dashboard de Marmitas</h1>
+    
+    <!-- Filtros -->
+    <form method="POST" action="/">
+        <label for="data_inicial">Data Inicial:</label>
+        <input type="date" id="data_inicial" name="data_inicial">
+        
+        <label for="data_final">Data Final:</label>
+        <input type="date" id="data_final" name="data_final">
+        
+        <label for="refeicao">Refeição:</label>
+        <select id="refeicao" name="refeicao">
+            <option value="">Todas</option>
+            <option value="almoço">Almoço</option>
+            <option value="janta">Janta</option>
+        </select>
+        
+        <button type="submit">Filtrar</button>
+    </form>
+    
+    <!-- Gráficos -->
+    <h2>Quantidade de Marmitas por Horário</h2>
+    {{ grafico_horario|safe }}
+    
+    <h2>Quantidade de Marmitas por Tipo</h2>
+    {{ grafico_tipo|safe }}
+    
+    <h2>Distribuição de Doce e Fruta</h2>
+    {{ grafico_opcoes|safe }}
+</body>
+</html>

@@ -1,4 +1,4 @@
-from banSiteCozinhadejaoSite import database, app 
+from SiteCozinha import database, app 
 from SiteCozinha.models import Usuario,Foto
 
 with app.app_context():
