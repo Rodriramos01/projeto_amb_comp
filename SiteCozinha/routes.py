@@ -33,12 +33,7 @@ def criarconta():
         return redirect(url_for("homepage"))
 
     return render_template("criarconta.html", form=form_criarconta)
-"""
-@app.route("/perfil/<id_usuario>", methods=["GET", "POST"])
-@login_required
-def perfil(id_usuario):
-    return render_template("perfil.html", usuario = Usuario)
-"""
+
 
 @app.route("/logout")
 @login_required

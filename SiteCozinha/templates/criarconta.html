@@ -1,33 +1,49 @@
-<!DOCTYPE html>
-<html lang="pt-br">
-<head>
-    <meta charset="UTF-8">
-    <title>pagina para criar conta do RU </title>
-</head>
-<body>
-    <h1>Bem-vindo ao meu site!</h1>   
+{% extends "homepage.html" %}
 
-    <p>Este é um parágrafo de exemplo.</p>
+{% block titulo %}
+Projeto FilaZero - Criar Conta
+{% endblock %}
 
-    <form method="POST">  
-        {{ form.csrf_token }}
+ {% block formulario %}
 
-        {{form.email.label() }}
-        {{form.email() }}
+        <form method="POST" class="popup">
+            {{ form.csrf_token }}
 
-        {{form.username.label() }}
-        {{form.username() }}
+            <svg height="40" width="40" >
+                <!-- Círculo azul de fundo -->
+                <circle cx="20" cy="20" r="20" fill="#0069b4" />
+              
+                <!-- Texto 'RU' em branco, com estilo arredondado -->
+                <text x="50%" y="50%" font-size="12" text-anchor="middle" fill="white" dy=".3em" font-family="Arial, sans-serif" font-weight="bold">RU</text>
+              </svg>
 
-        {{ form.senha.label() }}
-        {{form.senha() }}
+          <h2>Bem-vindo ao Projeto FilaZero</h2>
 
-        {{ form.confirmacao_senha.label() }}
-        {{form.confirmacao_senha() }}
+          <div class="div-input">
+              {{ form.email.label(class="label") }}
+                {{ form.email(class="input") }}
+          </div>
+
+            <div class="div-input">
+              {{ form.username.label(class="label") }}
+                {{ form.username(class="input") }}
+          </div>
+
+          <div class="div-input">
+            {{ form.senha.label(class="label") }}
+            {{ form.senha(class="input") }}
+          </div>
+
+          <div class="div-input">
+            {{ form.confirmacao_senha.label(class="label") }}
+            {{ form.confirmacao_senha(class="input") }}
+          </div>
 
 
-        {{form.botao_confirmacao() }}
+          <div class="div-botao">
+              {{ form.botao_confirmacao(class="botao-login") }}
+            <a href="{{ url_for('homepage') }}" class="link-criarconta">Já tem uma conta? Faça Login</a>
+          </div>
 
-    </form>   
-<a href="{{ url_for('homepage')}}" > Faça login aqui! </a>        
-</body>
-</html>
+        </form>
+          {% endblock %}

@@ -2,37 +2,59 @@
 <html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dashboard de Marmitas</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
 </head>
 <body>
-    <h1>Dashboard de Marmitas</h1>
-    {% include "navbar.html" %}
-    <!-- Filtros -->
-    <form method="POST" action="/">
-        <label for="data_inicial">Data Inicial:</label>
-        <input type="date" id="data_inicial" name="data_inicial">
-        
-        <label for="data_final">Data Final:</label>
-        <input type="date" id="data_final" name="data_final">
-        
-        <label for="refeicao">Refeição:</label>
-        <select id="refeicao" name="refeicao">
-            <option value="">Todas</option>
-            <option value="almoço">Almoço</option>
-            <option value="janta">Janta</option>
-        </select>
-        
-        <button type="submit">Filtrar</button>
-    </form>
-    
-    <!-- Gráficos -->
-    <h2>Quantidade de Marmitas por Horário</h2>
-    {{ grafico_horario|safe }}
-    
-    <h2>Quantidade de Marmitas por Tipo</h2>
-    {{ grafico_tipo|safe }}
-    
-    <h2>Distribuição de Doce e Fruta</h2>
-    {{ grafico_opcoes|safe }}
+    <div class="container-dashboard">
+        <h1 class="titulo-dashboard">Dashboard de Marmitas</h1>
+
+        {% include "navbar.html" %}
+
+        <!-- Filtros -->
+        <div class="filtros">
+            <form method="POST" action="/">
+                <div class="campo-form">
+                    <label for="data_inicial">Data Inicial:</label>
+                    <input type="date" id="data_inicial" name="data_inicial" required>
+                </div>
+                <div class="campo-form">
+                    <label for="data_final">Data Final:</label>
+                    <input type="date" id="data_final" name="data_final" required>
+                </div>
+                <div class="campo-form">
+                    <label for="refeicao">Refeição:</label>
+                    <select id="refeicao" name="refeicao">
+                        <option value="">Todas</option>
+                        <option value="almoço">Almoço</option>
+                        <option value="janta">Janta</option>
+                    </select>
+                </div>
+                <div class="campo-form">
+                    <button type="submit" class="botao">Filtrar</button>
+                    <button type="reset" class="botao-reset">Resetar</button>
+                </div>
+            </form>
+        </div>
+
+        <!-- Gráficos -->
+        <div class="graficos">
+            <div class="grafico">
+                <h3>Quantidade de Marmitas por Horário</h3>
+                {{ grafico_horario|safe }}
+            </div>
+
+            <div class="grafico">
+                <h3>Quantidade de Marmitas por Tipo</h3>
+                {{ grafico_tipo|safe }}
+            </div>
+
+            <div class="grafico">
+                <h3>Distribuição de Doce e Fruta</h3>
+                {{ grafico_opcoes|safe }}
+            </div>
+        </div>
+    </div>
 </body>
 </html>

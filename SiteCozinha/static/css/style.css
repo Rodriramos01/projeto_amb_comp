@@ -16,7 +16,7 @@
   }
   
   h1 {
-    color: #c00;
+    color: #0c5dea;
     font-size: 20px;
     font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
       Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
@@ -31,12 +31,17 @@
     overflow: hidden;
   }
   
-  .logo-pinterest {
+  .logo-restaurante {
     display: flex;
     align-items: center;
     width: fit-content;
-    column-gap: 4px;
-  }
+    column-gap: 8px;
+}
+
+.logo-restaurante img {
+    height: 50px; /* Ajusta o tamanho da logo */
+    border-radius: 8px; /* Adiciona bordas arredondadas */
+}
   
   .link-nav {
     font-size: 16px;
@@ -64,10 +69,11 @@
     justify-content: space-between;
   }
   
-  .bg-imagem-pinterest {
+ .bg-imagem-restaurante {
+    border-radius: 4%;
     width: 100%;
     position: fixed;
-    top: 50vh;
+    top: 45vh;
   }
   
   .container {
@@ -140,12 +146,12 @@
     text-transform: uppercase;
     font-weight: bold;
     cursor: pointer;
-    background-color: #e60023;
+    background-color: #0054e6;
     color: #fff;
   }
   
   .botao-login:hover {
-    background-color: #d50c22;
+    background-color: #0054e6;
   }
   
   .link-criarconta {
@@ -233,3 +239,57 @@
     display: flex;
     column-gap: 20px;
   }
+/* alteração do dash abaixo daqui*/
+
+/* Estilo para os gráficos */
+.graficos {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 30px;
+}
+
+.grafico {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.grafico h3 {
+    color: #0c5dea;
+    margin-bottom: 15px;
+}
+
+@media (max-width: 768px) {
+    .graficos {
+        grid-template-columns: 1fr;
+    }
+
+    .campo-form {
+        margin-bottom: 15px;
+    }
+}
+
+.botao {
+    background-color: #0054e6;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 25px;
+    font-weight: bold;
+    cursor: pointer;
+    width: 100%;
+    margin-top: 10px;
+    text-transform: uppercase;
+}
+.container-dashboard {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.titulo-dashboard {
+    color: #0c5dea;
+    text-align: center;
+    margin-bottom: 20px;
+}
