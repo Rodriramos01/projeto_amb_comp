@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastrar Cardápio</title>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        .back-button {
+            font-size: 20px;
+            color: #007bff;
+            text-decoration: none;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container mt-5">
+        <!-- Seta para voltar -->
+        <a href="{{ url_for('index') }}" class="back-button">&larr; Voltar</a>
+
+        <h2 class="text-center mt-4">Cadastrar Cardápio</h2>
+
+        <!-- Área para exibir mensagens de feedback -->
+        {% with messages = get_flashed_messages() %}
+            {% if messages %}
+                <div class="alert alert-success" role="alert">
+                    {{ messages[0] }}
+                </div>
+            {% endif %}
+        {% endwith %}
+
+        <!-- Formulário de cadastro do cardápio -->
+        <form action="{{ url_for('cadastrar_cardapio') }}" method="POST">
+            <!-- Saladas -->
+            <div class="form-group">
+                <label for="salada1">Salada 1</label>
+                <input type="text" class="form-control" id="salada1" name="salada1" placeholder="Digite o nome da salada 1" required>
+            </div>
+            <div class="form-group">
+                <label for="salada2">Salada 2</label>
+                <input type="text" class="form-control" id="salada2" name="salada2" placeholder="Digite o nome da salada 2" required>
+            </div>
+
+            <!-- Prato Principal -->
+            <div class="form-group">
+                <label for="prato_principal">Prato Principal</label>
+                <input type="text" class="form-control" id="prato_principal" name="prato_principal" placeholder="Digite o nome do prato principal" required>
+            </div>
+
+            <!-- Vegetariano -->
+            <div class="form-group">
+                <label for="vegetariano">Vegetariano</label>
+                <input type="text" class="form-control" id="vegetariano" name="vegetariano" placeholder="Digite o prato vegetariano" required>
+            </div>
+
+            <!-- Guarnições -->
+            <div class="form-group">
+                <label for="guarnicao1">Guarnição 1</label>
+                <input type="text" class="form-control" id="guarnicao1" name="guarnicao1" placeholder="Digite o nome da guarnição 1" required>
+            </div>
+            <div class="form-group">
+                <label for="guarnicao2">Guarnição 2</label>
+                <input type="text" class="form-control" id="guarnicao2" name="guarnicao2" placeholder="Digite o nome da guarnição 2" required>
+            </div>
+
+            <!-- Acompanhamentos -->
+            <div class="form-group">
+                <label for="acompanhamento1">Acompanhamento 1</label>
+                <input type="text" class="form-control" id="acompanhamento1" name="acompanhamento1" placeholder="Digite o nome do acompanhamento 1" required>
+            </div>
+            <div class="form-group">
+                <label for="acompanhamento2">Acompanhamento 2</label>
+                <input type="text" class="form-control" id="acompanhamento2" name="acompanhamento2" placeholder="Digite o nome do acompanhamento 2" required>
+            </div>
+            <div class="form-group">
+                <label for="acompanhamento3">Acompanhamento 3</label>
+                <input type="text" class="form-control" id="acompanhamento3" name="acompanhamento3" placeholder="Digite o nome do acompanhamento 3" required>
+            </div>
+
+            <!-- Sobremesas -->
+            <div class="form-group">
+                <label for="sobremesa1">Sobremesa 1</label>
+                <input type="text" class="form-control" id="sobremesa1" name="sobremesa1" placeholder="Digite o nome da sobremesa 1" required>
+            </div>
+            <div class="form-group">
+                <label for="sobremesa2">Sobremesa 2</label>
+                <input type="text" class="form-control" id="sobremesa2" name="sobremesa2" placeholder="Digite o nome da sobremesa 2" required>
+            </div>
+
+            <button type="submit" class="btn btn-primary mb-4">Enviar</button>
+        </form>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

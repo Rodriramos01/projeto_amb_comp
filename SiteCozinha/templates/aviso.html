@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Enviar Mensagem</title>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        /* Estilizando a seta para voltar */
+        .back-button {
+            font-size: 20px;
+            color: #007bff;
+            text-decoration: none;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container mt-5">
+        <!-- Seta para voltar -->
+        <a href="{{ url_for('index') }}" class="back-button">&larr; Voltar</a>
+
+        <h2 class="text-center mt-4">Enviar Mensagem</h2>
+
+        <!-- Formulário de envio de mensagem -->
+        <form action="{{ url_for('enviar_mensagem') }}" method="POST">
+            <div class="form-group text-center">
+                <label for="mensagem">Esta mensagem irá aparecer na tela inicial do aplicativo, destacada em vermelho.</label>
+                <textarea class="form-control" id="mensagem" name="mensagem" rows="5" placeholder="Digite sua mensagem aqui"></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary mb-4">Enviar</button>
+        </form>
+
+        <!-- Área para exibir mensagens de feedback -->
+        {% with messages = get_flashed_messages() %}
+            {% if messages %}
+                <div class="alert alert-success" role="alert">
+                    {{ messages[0] }}
+                </div>
+            {% endif %}
+        {% endwith %}
+
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

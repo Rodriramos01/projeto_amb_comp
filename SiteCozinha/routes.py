@@ -1,4 +1,4 @@
-from flask import render_template, url_for, redirect, request
+from flask import render_template, url_for, redirect, request,  flash, jsonify
 from SiteCozinha import app, database, bcrypt
 from flask_login import login_required, login_user, logout_user, current_user
 from SiteCozinha.forms import FormLogin, FormCriarConta
@@ -6,8 +6,11 @@ from SiteCozinha.models import Usuario, Foto
 import pandas as pd
 import plotly.express as px
 import plotly.io as pio
-from datetime import datetime
+from datetime import datetime, timedelta
 from werkzeug.utils import secure_filename
+import sqlite3
+
+
 
 @app.route("/", methods =["GET", "POST"])
 def homepage():
@@ -34,7 +37,7 @@ def criarconta():
 
     return render_template("criarconta.html", form=form_criarconta)
 
-
+# Rota de logout
 @app.route("/logout")
 @login_required
 def logout():
@@ -97,3 +100,80 @@ def dashboard():
 
     return render_template('dashboard.html', grafico_horario=grafico_horario,
                            grafico_tipo=grafico_tipo, grafico_opcoes=grafico_opcoes)
+
+# parte 2 da visão RU 
+
+# Rota para obter pedidos do banco SQLite
+def obter_pedidos():
+    conn = sqlite3.connect('instance/pedidos.db')
+    cursor = conn.cursor()
+    cursor.execute('SELECT * FROM pedidos')
+    pedidos = cursor.fetchall()
+    conn.close()
+
+    pedidos_json = [
+        {'id': pedido[0], 'opcao': pedido[1], 'codigo': pedido[2], 'status': pedido[3]}
+        for pedido in pedidos
+    ]
+    return pedidos_json
+
+# Rota para atualizar o status de um pedido (uso interno)
+def atualizar_pedido(pedido_id):
+    conn = sqlite3.connect('instance/pedidos.db')
+    cursor = conn.cursor()
+    timestamp = datetime.now()
+    cursor.execute('UPDATE pedidos SET status = ?, timestamp_pronto = ? WHERE id = ?', ('pronto', timestamp, pedido_id))
+    conn.commit()
+    conn.close()
+
+# Página inicial para a fila de pedidos
+@app.route('/fila_pedidos')
+@login_required
+def index():
+    pedidos = obter_pedidos()
+    return render_template('index.html', pedidos=pedidos)
+
+# Rota para marcar um pedido como pronto
+@app.route('/marcar_pronto/', methods=['GET'])
+@login_required
+def marcar_pronto():
+    pedido_id = request.args.get('id', type=int)
+    atualizar_pedido(pedido_id)
+    return redirect(url_for('index'))
+
+# Rota para deletar pedidos com status 'pronto'
+@app.route('/deletar_prontos', methods=['POST'])
+@login_required
+def deletar_pedidos_prontos():
+    conn = sqlite3.connect('instance/pedidos.db')
+    cursor = conn.cursor()
+    cursor.execute("DELETE FROM pedidos WHERE status = 'pronto'")
+    conn.commit()
+    conn.close()
+    return redirect(url_for('index'))
+
+# Rota para a página de aviso
+@app.route('/aviso')
+@login_required
+def aviso():
+    return render_template('aviso.html')
+
+# Rota para enviar mensagem (pode exigir login dependendo do caso)
+@app.route('/enviar_mensagem', methods=['POST'])
+@login_required
+def enviar_mensagem():
+    mensagem = request.form.get('mensagem')
+    flash('Sua mensagem foi enviada com sucesso!')
+    return render_template('aviso.html')
+
+# Rota para exibir o cardápio
+@app.route('/cardapio')
+@login_required
+def cardapio():
+    return render_template('cardapio.html')
+
+# Rota para cadastrar o cardápio (placeholder para implementação futura)
+@app.route('/cadastrar_cardapio')
+@login_required
+def cadastrar_cardapio():
+    pass
