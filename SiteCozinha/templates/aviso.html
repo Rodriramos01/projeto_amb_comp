@@ -6,20 +6,90 @@
     <title>Enviar Mensagem</title>
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <style>
-        /* Estilizando a seta para voltar */
+        /* Customização da barra lateral */
+        .sidenav {
+            height: 100%;
+            width: 200px;  /* Diminuir a largura para 200px */
+            position: fixed;
+            top: 0;
+            left: 0;
+            background-color: #111;
+            padding-top: 20px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .nav-links {
+            flex-grow: 1;  /* Isso faz com que os links ocupem o espaço disponível antes do botão de logout */
+        }
+
+        .sidenav a {
+            padding: 10px 16px;
+            text-decoration: none;
+            font-size: 18px;
+            color: #818181;
+            display: block;
+        }
+
+        .sidenav a:hover {
+            color: #f1f1f1;
+        }
+
+        .logout-btn {
+            background-color: transparent;
+            color: red;
+            text-align: center;
+            font-size: 18px;
+            border: none;
+            width: 100%;
+            cursor: pointer;
+        }
+
+        .logout-btn:hover {
+            color: darkred;
+        }
+
+        .main-content {
+            margin-left: 200px;  /* Ajustar o conteúdo para o novo tamanho da barra lateral */
+            padding: 20px;
+        }
+
         .back-button {
             font-size: 20px;
             color: #007bff;
             text-decoration: none;
             margin-top: 10px;
         }
+
+        /* Tabela e formulário centralizado */
+        .container {
+            max-width: 800px;
+        }
     </style>
 </head>
 <body>
-    <div class="container mt-5">
-        <!-- Seta para voltar -->
-        <a href="{{ url_for('index') }}" class="back-button">&larr; Voltar</a>
+    <!-- Barra lateral -->
+    <div class="sidenav">
+        <h2 class="text-white text-center">FilaZero</h2>
+        <div class="nav-links">
+            <!-- Botões de navegação na parte superior -->
+            <a href="/dashboard">Dashboard</a>
+            <a href="{{ url_for('cardapio') }}">Cardápio</a>
+            <a href="{{ url_for('aviso') }}">Aviso</a>
+            
+        </div>
+        <!-- Botão de Logout em vermelho na parte inferior -->
+        <a href="{{ url_for('logout') }}">
+            <button class="logout-btn">Logout</button>
+        </a> 
+    </div>
 
+    <!-- Conteúdo principal -->
+    <div class="main-content">
+        <!-- Seta para voltar -->
+        <!--<a href="{{ url_for('index') }}" class="back-button">&larr; Voltar</a>
+-->
         <h2 class="text-center mt-4">Enviar Mensagem</h2>
 
         <!-- Formulário de envio de mensagem -->
@@ -39,9 +109,9 @@
                 </div>
             {% endif %}
         {% endwith %}
-
     </div>
 
+    <!-- Scripts do Bootstrap -->
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
